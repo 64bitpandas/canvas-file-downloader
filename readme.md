@@ -26,12 +26,12 @@ python canvas.py YOUR-TOKEN CANVAS-DOMAIN
 Where:
 
 - `YOUR-TOKEN` is the token access of Canvas, generated [here][get_token].
-- `CANVAS-DOMAIN` the Canvas domain where files will be downloaded.
+- `CANVAS-DOMAIN` the Canvas domain where files will be downloaded, without the protocol or course path. (Example: `bcourses.berkeley.edu`)
 
 Optional parameters:
 
-- `-f FROM`: where to download the files, can be modules,
-  folders or both (default: `both`).
+- `-f FROM`: where to download the files, can be `modules`,
+  `folders` or `both` (default: `both`).
 - `-o DIR`: name of the output directory (default: `CanvasFiles`).
 - `--all`: include all courses instead of only favorites.
 

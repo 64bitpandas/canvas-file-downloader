@@ -129,7 +129,7 @@ class CanvasDownloader(CanvasApi):
 
     out_dir: str
 
-    def download_files(self, all_courses=False, courses_ids=None, use="both"):
+    def download_files(self, all_courses=False, courses_ids=None, use="folders"):
         """Downloads files from Canvas"""
         courses = self.get_courses(not all_courses)
 
@@ -143,6 +143,9 @@ class CanvasDownloader(CanvasApi):
 
             methods = [self._download_from_modules, self._download_from_folders]
 
+
+            print(use)
+
             if use == "both":
                 for method in methods:
                     method(course_code, course_id)
@@ -152,6 +155,7 @@ class CanvasDownloader(CanvasApi):
                 methods.reverse()
 
             available = methods[0](course_code, course_id)
+
             if not available:
                 methods[1](course_code, course_id)
         return True
@@ -165,8 +169,10 @@ class CanvasDownloader(CanvasApi):
 
             files_list = self.get_files_from_folder(folder["id"])
 
+
             if "errors" in files_list:
-                return False
+                print_c("[Skipped] " + folder["full_name"], "error", 1)
+                continue
 
             folder_path = [course_name] + folder["full_name"].split("/")[1:]
             print_c("[F] " + folder["full_name"], "item", 1)
