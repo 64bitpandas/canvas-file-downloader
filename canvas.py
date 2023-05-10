@@ -129,7 +129,7 @@ class CanvasDownloader(CanvasApi):
 
     out_dir: str
 
-    def download_files(self, all_courses=False, courses_ids=None, use="folders"):
+    def download_files(self, all_courses=False, use="both"):
         """Downloads files from Canvas"""
         courses = self.get_courses(not all_courses)
 
@@ -142,9 +142,6 @@ class CanvasDownloader(CanvasApi):
             course_code, course_id = course["id"], course["course_code"]
 
             methods = [self._download_from_modules, self._download_from_folders]
-
-
-            print(use)
 
             if use == "both":
                 for method in methods:
